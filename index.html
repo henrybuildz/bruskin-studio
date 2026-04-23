@@ -448,33 +448,12 @@
 
     .port-card:hover .port-thumb-inner { transform: scale(1.04); }
 
-    /* Distinct warm gradient per project */
-    .port-card:nth-child(1) .port-thumb-inner {
-      background:
-        radial-gradient(ellipse at 30% 60%, rgba(210,130,80,.45) 0%, transparent 55%),
-        radial-gradient(ellipse at 75% 20%, rgba(240,180,100,.3) 0%, transparent 50%),
-        linear-gradient(140deg, #F5E6D0 0%, #EDD4AA 60%, #E8C88A 100%);
-    }
-
-    .port-card:nth-child(2) .port-thumb-inner {
-      background:
-        radial-gradient(ellipse at 60% 40%, rgba(220,80,60,.35) 0%, transparent 55%),
-        radial-gradient(ellipse at 20% 75%, rgba(200,60,50,.2) 0%, transparent 50%),
-        linear-gradient(150deg, #F5CFCA 0%, #EDB8AF 60%, #E8A090 100%);
-    }
-
-    .port-card:nth-child(3) .port-thumb-inner {
-      background:
-        radial-gradient(ellipse at 45% 35%, rgba(80,100,200,.3) 0%, transparent 55%),
-        radial-gradient(ellipse at 80% 70%, rgba(60,80,180,.2) 0%, transparent 50%),
-        linear-gradient(145deg, #D0D8F5 0%, #B8C3ED 60%, #A0ADDD 100%);
-    }
-
-    .port-card:nth-child(4) .port-thumb-inner {
-      background:
-        radial-gradient(ellipse at 35% 55%, rgba(50,160,130,.35) 0%, transparent 55%),
-        radial-gradient(ellipse at 75% 25%, rgba(40,140,110,.2) 0%, transparent 50%),
-        linear-gradient(148deg, #CCEEE5 0%, #A8DDD0 60%, #88CCBC 100%);
+    .port-thumb-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
     }
 
     /* floating label inside thumb */
@@ -512,6 +491,15 @@
       color: var(--fg-muted);
       font-weight: 500;
     }
+
+    .port-desc {
+      font-size: .875rem;
+      color: var(--fg-muted);
+      line-height: 1.6;
+      margin-top: .45rem;
+    }
+
+    a.port-card { display: block; cursor: pointer; }
 
     /* ── ABOUT ───────────────────────────────────────────────────── */
     #about { background: var(--surface-2); }
@@ -947,49 +935,57 @@
       </div>
 
       <div class="port-grid">
-        <article class="port-card reveal">
+        <a href="https://henrybuildz.github.io/green-door-bistro/" target="_blank" rel="noopener" class="port-card reveal">
           <div class="port-thumb">
-            <div class="port-thumb-inner" role="img" aria-label="Green Door Bistro website preview"></div>
-            <div class="port-label">Restaurant · Wien 1070</div>
+            <div class="port-thumb-inner">
+              <img src="green-door-preview.png" alt="Green Door Bistro website screenshot">
+            </div>
+            <div class="port-label">Restaurant Website</div>
           </div>
           <div class="port-body">
             <h3 class="port-name">Green Door Bistro</h3>
-            <p class="port-meta">Custom design &nbsp;·&nbsp; Live in 6 days</p>
+            <p class="port-desc">A health-forward bistro hidden inside Hofburg Palace. Full brand identity and website built from scratch — capturing the warmth of a hidden gem.</p>
           </div>
-        </article>
+        </a>
 
-        <article class="port-card reveal d1">
+        <a href="https://henrybuildz.github.io/aspic-vienna/" target="_blank" rel="noopener" class="port-card reveal d1">
           <div class="port-thumb">
-            <div class="port-thumb-inner" role="img" aria-label="Mr. Noodle website preview"></div>
-            <div class="port-label">Asian Restaurant · Wien 1020</div>
-          </div>
-          <div class="port-body">
-            <h3 class="port-name">Mr. Noodle</h3>
-            <p class="port-meta">Full redesign &nbsp;·&nbsp; Menu integration</p>
-          </div>
-        </article>
-
-        <article class="port-card reveal d2">
-          <div class="port-thumb">
-            <div class="port-thumb-inner" role="img" aria-label="ASPIC Vienna website preview"></div>
-            <div class="port-label">Fine Dining · Wien 1010</div>
+            <div class="port-thumb-inner">
+              <img src="aspic-preview.png" alt="ASPIC Vienna website screenshot">
+            </div>
+            <div class="port-label">Restaurant Website</div>
           </div>
           <div class="port-body">
             <h3 class="port-name">ASPIC Vienna</h3>
-            <p class="port-meta">New launch &nbsp;·&nbsp; Reservation system</p>
+            <p class="port-desc">A moody, editorial site for one of Vienna's most creative sharing-plates restaurants. Dark, refined, and built to convert.</p>
           </div>
-        </article>
+        </a>
 
-        <article class="port-card reveal d3">
+        <a href="https://henrybuildz.github.io/mr-noodle-vienna/" target="_blank" rel="noopener" class="port-card reveal d2">
           <div class="port-thumb">
-            <div class="port-thumb-inner" role="img" aria-label="Stella Marina website preview"></div>
-            <div class="port-label">Seafood · Wien 1030</div>
+            <div class="port-thumb-inner">
+              <img src="mr-noodle-preview.png" alt="Mr Noodle Vienna website screenshot">
+            </div>
+            <div class="port-label">Restaurant Website</div>
           </div>
           <div class="port-body">
-            <h3 class="port-name">Stella Marina</h3>
-            <p class="port-meta">Brand + web &nbsp;·&nbsp; Bilingual (DE/EN)</p>
+            <h3 class="port-name">Mr Noodle Vienna</h3>
+            <p class="port-desc">A dark, atmospheric site for Vienna's most generous Asian bowl. Full menu with DE/EN toggle, 13 categories, and a premium lacquerware aesthetic.</p>
           </div>
-        </article>
+        </a>
+
+        <a href="https://henrybuildz.github.io/mis-beauty-coworking/" target="_blank" rel="noopener" class="port-card reveal d3">
+          <div class="port-thumb">
+            <div class="port-thumb-inner">
+              <img src="mis-beauty-preview.png" alt="MIS Beauty Coworking website screenshot">
+            </div>
+            <div class="port-label">Beauty Studio Website</div>
+          </div>
+          <div class="port-body">
+            <h3 class="port-name">MIS Beauty Coworking</h3>
+            <p class="port-desc">A refined coworking studio for independent nail artists in Vienna — trilingual (EN/DE/RU), minimal, and built to feel like a quiet escape in the city.</p>
+          </div>
+        </a>
       </div>
     </section>
 
@@ -1007,7 +1003,6 @@
           <h2 class="section-hed reveal d1" id="about-hed">One person.<br>One focus.</h2>
           <div class="about-body reveal d2">
             <p>I'm a Vienna-based designer. My clients are mostly <strong>restaurants, cafes, and shops</strong> — places with regulars and no website. I build sites quickly, keep the process simple, and stay reachable after launch.</p>
-            <p>I use AI in my workflow. It's why I can turn a project around in a week at a price that makes sense for a local business — without cutting corners on the design.</p>
             <p>No agencies, no middlemen. You work with me directly. If something needs changing six months from now, you reach me directly.</p>
           </div>
         </div>
