@@ -748,6 +748,112 @@
       .services-grid { grid-template-columns: 1fr; }
     }
 
+    /* ── MOBILE MENU ─────────────────────────────────────────────── */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      pointer-events: none;
+    }
+
+    .mobile-menu.open { pointer-events: all; }
+
+    .mobile-menu-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(28,25,23,.35);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity .3s var(--ease);
+    }
+
+    .mobile-menu.open .mobile-menu-backdrop { opacity: 1; }
+
+    .mobile-menu-panel {
+      position: absolute;
+      top: 0; right: 0;
+      width: min(320px, 88vw);
+      height: 100%;
+      background: var(--surface);
+      padding: 1.5rem 1.75rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      transform: translateX(100%);
+      transition: transform .35s var(--ease);
+      box-shadow: -8px 0 32px rgba(28,25,23,.1);
+    }
+
+    .mobile-menu.open .mobile-menu-panel { transform: translateX(0); }
+
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mobile-menu-brand {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--fg);
+    }
+
+    .mobile-menu-close {
+      width: 36px; height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      color: var(--fg);
+      transition: background .18s;
+    }
+    .mobile-menu-close:hover { background: var(--accent-bg); color: var(--accent); }
+
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      list-style: none;
+    }
+
+    .mobile-menu-links a {
+      display: block;
+      padding: .85rem 1rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--fg-muted);
+      border-radius: 10px;
+      transition: background .15s, color .15s;
+    }
+    .mobile-menu-links a:hover { background: var(--surface-2); color: var(--fg); }
+
+    .mobile-menu-cta {
+      margin-top: auto;
+    }
+
+    .mobile-menu-cta a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: 1rem;
+      background: var(--fg);
+      color: #fff;
+      border-radius: var(--r-pill);
+      font-size: .95rem;
+      font-weight: 700;
+      letter-spacing: -.015em;
+    }
+
+    /* hamburger → X animation */
+    .nav-hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
     }
@@ -781,6 +887,34 @@
       <span></span><span></span><span></span>
     </button>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu" aria-modal="true" role="dialog" aria-label="Navigation menu">
+    <div class="mobile-menu-backdrop" id="mobile-backdrop"></div>
+    <div class="mobile-menu-panel">
+      <div class="mobile-menu-header">
+        <span class="mobile-menu-brand">Bruskin Studio</span>
+        <button class="mobile-menu-close" id="mobile-close" aria-label="Close menu">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <ul class="mobile-menu-links" role="list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Work</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <div class="mobile-menu-cta">
+        <a href="#contact">
+          Get in touch
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 7h10M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <div class="wrap">
 
@@ -1131,6 +1265,32 @@
     /* ── EmailJS ──────────────────────────────────────────────────── */
     // TODO: Replace with your actual EmailJS credentials
     emailjs.init('YOUR_PUBLIC_KEY');   // ← YOUR_PUBLIC_KEY
+
+    /* ── Mobile menu ─────────────────────────────────────────────── */
+    const hamburger  = document.querySelector('.nav-hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileClose = document.getElementById('mobile-close');
+    const mobileBackdrop = document.getElementById('mobile-backdrop');
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      hamburger.classList.add('active');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openMenu);
+    mobileClose.addEventListener('click', closeMenu);
+    mobileBackdrop.addEventListener('click', closeMenu);
+
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
     /* ── Nav scroll ───────────────────────────────────────────────── */
     const nav = document.getElementById('nav');
